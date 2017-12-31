@@ -5,6 +5,7 @@
  */
 package com.tom.newUI;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -37,14 +38,28 @@ public class Rt implements Fun{
         double tempRe=0,tempIm=0;
         double temp = 0;
 
-        Double[][] tempcomp = new Double[2][MainFrame.Td_no];
-        FutureTask<Double[]>[] future = new FutureTask[MainFrame.Td_no];
-        for(int i = 0;i<MainFrame.Td_no;i++){
-            TdRt td0 = new TdRt(gf, t, 24000000.0, i);
+        Double[][] tempcomp = new Double[2][4];
+        FutureTask<Double[]>[] future = new FutureTask[4];
+        for(int i = 0;i<4;i++){
+            int no = i;
+            Callable<Double[]> td0 = new Callable<Double[]>(){
+                public Double[] call() throws Exception{
+                double f;
+                double tempRe=0,tempIm=0;
+                Double[] temp = new Double[2];
+                for(f=-(br/2-1)+br*no/4;f<-(br/2-1)+br*(no+1)/4;f=f+br/10000){
+                    tempRe=tempRe+gf.fun(f)*Math.cos(2*Math.PI*f*t);
+                    tempIm=tempIm+gf.fun(f)*Math.sin(2*Math.PI*f*t);
+                }
+                temp[0] = tempRe;
+                temp[1] = tempIm;
+                return temp;
+                }
+            };
             future[i] = new FutureTask<>(td0);
             new Thread(future[i]).start();
         }
-        for(int i = 0;i<MainFrame.Td_no;i++){
+        for(int i = 0;i<4;i++){
             try {
                 tempcomp[0][i] = future[i].get()[0];
                 tempcomp[1][i] = future[i].get()[1];

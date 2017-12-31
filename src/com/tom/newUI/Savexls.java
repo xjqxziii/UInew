@@ -22,7 +22,7 @@ public class Savexls {
         }
         excel.AddCell(0,0, "频偏");
         excel.AddCell(1,0,ff[0]+"MHz");
-        excel.AddCell(0,1,"最大功率谱密度");
+        excel.AddCell(0,1,"λ");
         excel.AddCell(1,1,ff[1]+"dBW/Hz");
         excel.AddCell(0,2,"RMS带宽");
         excel.AddCell(1,2,ff[2]+"MHz");

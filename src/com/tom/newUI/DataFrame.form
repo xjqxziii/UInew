@@ -152,7 +152,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="&#x5b8b;&#x4f53;" size="30" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x6700;&#x5927;&#x529f;&#x7387;&#x8c31;&#x5bc6;&#x5ea6;"/>
+        <Property name="text" type="java.lang.String" value="&#x3bb;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

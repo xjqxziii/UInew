@@ -101,7 +101,7 @@ public class DataFrame extends javax.swing.JFrame {
         DecimalFormat    df   = new DecimalFormat("######0.0");  
         
         lb1.setText(df.format(fmax));
-        lb2.setText(df.format(max));
+        lb2.setText(df.format(lamuda));
         lb3.setText(df.format(beta_rms));
         lb4.setText(df.format(beta_rect));
         lb5.setText(df.format(kls1));
@@ -166,7 +166,7 @@ public class DataFrame extends javax.swing.JFrame {
         jLabel1.setText("频偏");
 
         jLabel2.setFont(new java.awt.Font("宋体", 0, 30)); // NOI18N
-        jLabel2.setText("最大功率谱密度");
+        jLabel2.setText("λ");
 
         jLabel3.setFont(new java.awt.Font("宋体", 0, 30)); // NOI18N
         jLabel3.setText("RMS带宽");

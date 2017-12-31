@@ -13,7 +13,6 @@ public class MainFrame extends javax.swing.JFrame {
     String str;
     boolean ab = true;
     DrawFun drawFun = null;
-    static int Td_no = 4;
     public MainFrame() {
         initComponents();
         jTextField3.setVisible(false);
