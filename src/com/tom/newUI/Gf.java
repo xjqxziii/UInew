@@ -13,31 +13,27 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author tom
  */
-public class Gf implements Fun{
+public class Gf extends Fun{
     int a;
     int b;
-    private boolean boc;
-    private boolean log;
-    
+        private boolean log;
+        
     public Gf(int a,int b,boolean log){
         this.b = b;
         this.a = a;
-        this.log = log;
+        this.setLog(log);
+        d = new DrawOneLine(this);
     }
+    //BOC或BPSK频谱函数
     
     public double fun(double f){
         double fc = b * DrawFun.ff;
         double gf;
-        if (boc) {
+        if (isBoc()) {
             double fs = a * DrawFun.ff;
             if((2*a/b)%2==0){
-                if (f==0) {
-                    gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
-                }else{
-                    gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
-                }
-            }
-            else{
+                gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
+            }else{
                 gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.cos(Math.PI*f/fc)/Math.PI/f),2);
             }
         } else {
@@ -46,6 +42,7 @@ public class Gf implements Fun{
         }
         
         if (log) {
+            //是否对函数结果取对数
             double loggf=10*Math.log10(gf);
             if (loggf<-100){
                 loggf=-100;
@@ -55,30 +52,6 @@ public class Gf implements Fun{
         return gf;
     }
     
-    public XYSeriesCollection[] draw(){
-        
-        double x1,y1;
-        double w_val;
-        XYSeries series;
-        series = new XYSeries("cc");
-        this.log = true;
-        if (boc) {
-            w_val=50000;
-        } else {
-            w_val=20000*b;
-        }
-        for(double i =-300;i+1<300;i++){
-            x1=i*w_val;    
-            y1=this.fun(x1);
-            series.add(x1,y1);
-        }
-        XYSeriesCollection dataset = new XYSeriesCollection();
-	dataset.addSeries(series);
-        XYSeriesCollection[] datasets;
-        datasets = new XYSeriesCollection[]{dataset};
-        return datasets;
-    }
-
     public boolean isLog() {
         return log;
     }
@@ -86,12 +59,13 @@ public class Gf implements Fun{
     public void setLog(boolean log) {
         this.log = log;
     }
-
-    public boolean isBoc() {
-        return boc;
-    }
-
-    public void setBoc(boolean boc) {
-        this.boc = boc;
+    
+    @Override
+    public void setW_val() {
+        if (isBoc()) {
+            w_val=50000;
+        } else {
+            w_val=20000*b;
+        }
     }
 }
