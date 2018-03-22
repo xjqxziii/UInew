@@ -15,10 +15,11 @@ public class MainFrame extends javax.swing.JFrame {
     DrawFun drawFun = null;
     public MainFrame() {
         initComponents();
+        //显示主界面
         jTextField3.setVisible(false);
         jLabel3.setVisible(false);
     }
-    
+    //主函数
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +55,11 @@ public class MainFrame extends javax.swing.JFrame {
         cb.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbItemStateChanged(evt);
+            }
+        });
+        cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbActionPerformed(evt);
             }
         });
 
@@ -97,7 +103,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         cb2.setFont(new java.awt.Font("微软雅黑", 0, 30)); // NOI18N
-        cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "时域波形", "频域波形", "自相关函数", "码跟踪误差" }));
+        cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "时域波形", "频域波形", "自相关函数", "码跟踪误差", "多径误差" }));
         cb2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb2ItemStateChanged(evt);
@@ -177,49 +183,58 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private double getDoubleFromTextField(JTextField tf){
+        //判断输入数据是否合法
         
         str =tf.getText().trim();
         temp=1;
-        if(ab){
-            if(str != null && str.length() != 0)
-            {
-                if(str.matches("^[0-9]+$")){
-                    temp = new Double(tf.getText());
-                }else{
-                    JOptionPane.showMessageDialog(this, "请输入正确的数值 !");
+        if(tf.isVisible()){
+            if(ab){
+                if(str != null && str.length() != 0)
+                {
+                    if(str.matches("^[0-9]+$")){
+                        temp = new Double(tf.getText());
+                    }else{
+                        JOptionPane.showMessageDialog(this, "请输入正确的数值 !");
+                        ab = false;
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "请输入数值 !");
                     ab = false;
                 }
             }
-            else{
-                JOptionPane.showMessageDialog(this, "请输入数值 !");
-                ab = false;
-            }
         }
-        
         return temp;
     }
 
     private void beginDrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginDrawActionPerformed
+        //绘图按钮点击事件
         drawFun = new DrawFun();
         int a = (int)getDoubleFromTextField(jTextField1);
         int b = (int)getDoubleFromTextField(jTextField2);
-        drawFun.setA(a);
-        drawFun.setB(b);
-        if (cb2.getSelectedIndex()==2) {
-            drawFun.setBr(getDoubleFromTextField(jTextField3));
+        if(a>b||cb.getSelectedIndex() == 1){
+            drawFun.setA(a);
+            drawFun.setB(b);
+            if (cb2.getSelectedIndex()==2) {
+                drawFun.setBr(getDoubleFromTextField(jTextField3));
+                //获得b_r
+            }
+            if (ab) {
+                drawFun.setBoc(cb.getSelectedIndex() == 0);
+                //获得要绘图函数类型
+                drawFun.setFlag(cb2.getSelectedIndex());
+                //获得函数是BOC还是BPSK
+                drawFun.paint();
+            }
+            ab = true;
+        }else{
+            JOptionPane.showMessageDialog(this, "输入数值不合法 !");
         }
-        
-
-        if (ab) {
-            drawFun.setBoc(cb.getSelectedIndex() == 0);
-            drawFun.setFlag(cb2.getSelectedIndex());
-            drawFun.paint();
-        }
-        ab = true;
     }//GEN-LAST:event_beginDrawActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         System.exit(0);
+        //退出按钮
     }//GEN-LAST:event_exitActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -232,6 +247,7 @@ public class MainFrame extends javax.swing.JFrame {
             dataFrame.setVisible(dataFrame.cal());
         }
         ab = true;
+        //计算数据按钮事件
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cb2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb2ItemStateChanged
@@ -243,6 +259,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField1.setVisible(cb.getSelectedIndex()==0);
         jLabel1.setVisible(cb.getSelectedIndex()==0);
     }//GEN-LAST:event_cbItemStateChanged
+
+    private void cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbActionPerformed
 
     /**
      * @param args the command line arguments

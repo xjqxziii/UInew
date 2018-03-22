@@ -12,6 +12,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author tom
  */
 public interface Fun {
+    //函数接口
     public double fun(double f);
     public XYSeriesCollection[] draw();
     public boolean isBoc();

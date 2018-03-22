@@ -23,7 +23,9 @@ public class Gf implements Fun{
         this.b = b;
         this.a = a;
         this.log = log;
+        
     }
+    //BOC或BPSK频谱函数
     
     public double fun(double f){
         double fc = b * DrawFun.ff;
@@ -31,13 +33,8 @@ public class Gf implements Fun{
         if (boc) {
             double fs = a * DrawFun.ff;
             if((2*a/b)%2==0){
-                if (f==0) {
-                    gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
-                }else{
-                    gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
-                }
-            }
-            else{
+                gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
+            }else{
                 gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.cos(Math.PI*f/fc)/Math.PI/f),2);
             }
         } else {
@@ -46,6 +43,7 @@ public class Gf implements Fun{
         }
         
         if (log) {
+            //是否对函数结果取对数
             double loggf=10*Math.log10(gf);
             if (loggf<-100){
                 loggf=-100;
@@ -56,6 +54,7 @@ public class Gf implements Fun{
     }
     
     public XYSeriesCollection[] draw(){
+        //画图函数
         
         double x1,y1;
         double w_val;

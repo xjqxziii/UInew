@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
@@ -59,8 +60,8 @@ public class DrawFun {
     double br;
     static final double ff = 1023000.0;
     
-//    绘图函数
     public void paint() {
+        //绘图函数
         Fun fun;
         String title=null,xlable=null,ylable=null;
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -74,7 +75,7 @@ public class DrawFun {
         switch(flag)
         {  
         case 0:
-            fun = new St(ff,(2*a/b));
+            fun = (boc)?new St(ff,(2*a/b)):new St(ff,b);
             fun.setBoc(boc);
             title=type + "时域波形";
             xlable="t";
@@ -105,6 +106,14 @@ public class DrawFun {
             ylable="码跟踪误差方差*c";
             dataset = fun.draw()[0];
         break;
+        case 4:
+            fun = new ManyWaysErr((int)a,(int)b);
+            fun.setBoc(boc);
+            title=type + "多径码跟踪误差";
+            xlable="delta";
+            ylable="码跟踪误差方差*c";
+            dataset = fun.draw()[0];
+        break;
         }
         
 	JFreeChart chart = ChartFactory.createXYLineChart(
@@ -117,14 +126,19 @@ public class DrawFun {
 		false, // tooltips
 		false // urls
 		);
-
+        
 	ChartFrame frame = new ChartFrame("函数波形", chart);
+        //画图窗口创建
         JButton saveImgBn;
         saveImgBn = new JButton();
         saveImgBn.setText("保存图片");
         saveImgBn.addActionListener((java.awt.event.ActionEvent evt) -> {
+            //绑定按键按下事件
             saveImg(chart);
+            JOptionPane.showMessageDialog(frame, "保存在程序目录下的文件夹中");
+            
         });
+        //添加保存图片按钮
 
         frame.setLayout(null);
         saveImgBn.setBounds(4, 4, 80, 20);
@@ -132,6 +146,7 @@ public class DrawFun {
         
 	frame.pack();
 	frame.setVisible(true);
+        //设置画图窗口显示
         
     }
     private boolean boc;
@@ -146,6 +161,7 @@ public class DrawFun {
 
     
     public void saveImg(JFreeChart chart){
+        //保存图像函数
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
         // new Date()为获取当前系统时间
         String fileName = df.format(new Date())+".jpg";

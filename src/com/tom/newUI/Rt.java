@@ -33,7 +33,7 @@ public class Rt implements Fun{
         this.gf=gf;
         this.br = br;
     }
-    
+    //自相关函数
     public double fun(double t){
         double tempRe=0,tempIm=0;
         double temp = 0;

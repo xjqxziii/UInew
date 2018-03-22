@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author Tom
  */
 public class DataFrame extends javax.swing.JFrame {
+    //显示数据界面
 
     int a; 
     int b;
@@ -38,13 +39,13 @@ public class DataFrame extends javax.swing.JFrame {
         for(f=-(br/2-1);f<br/2;f=f+br/10000.0){
             lamuda=lamuda+Math.pow(10,funGf.fun(f)/10)*br/10000.0;
         }
-        
+        //计算lamuda
         double beta_rms=0.0;
         for(f=-(br/2-1);f<br/2;f=f+br/10000.0){
             beta_rms=beta_rms+f*f*Math.pow(10,funGf.fun(f)/10)*br/10000.0/lamuda;
         }
         beta_rms = Math.sqrt(beta_rms);
-        
+        //计算beta_rms
         double kls1=0.0;
         for(f=-(br/2-1);f<br/2;f=f+br/10000.0){
             kls1=kls1+Math.pow(10,funGf.fun(f)/10)*Math.pow(10,funGf.fun(f)/10)*br/10000.0/lamuda;
@@ -57,10 +58,10 @@ public class DataFrame extends javax.swing.JFrame {
         for(f=-(br/2-1);f<br/2;f=f+br/10000.0){
             lamuda2=lamuda2+Math.pow(10,funBOC.fun(f)/10)*br/10000.0;
         }
-        
         for(f=-(br/2-1);f<br/2;f=f+br/10000.0){
             kls2=kls2+Math.pow(10,funBOC.fun(f)/10)*Math.pow(10,funGf.fun(f)/10)*br/10000.0/lamuda2;
         }
+        //计算与BOC(10.5)的kls
         
         double lamuda3=0.0;
         double kls3=0.0;
@@ -72,6 +73,7 @@ public class DataFrame extends javax.swing.JFrame {
         for(f=-(br/2-1);f<br/2;f=f+br/10000.0){
             kls3=kls3+Math.pow(10,funBPSK.fun(f)/10)*Math.pow(10,funGf.fun(f)/10)*br/10000.0/lamuda3;
         }
+        //计算与BPSK1.023Mhz的kls
         
         double beta_rect = 0.0;
         double max = -101;
@@ -82,6 +84,7 @@ public class DataFrame extends javax.swing.JFrame {
                 fmax = f;
             }
         }
+        //计算beta_rect
         
         max = Math.pow(10,max/10);
         beta_rect = lamuda/max;
@@ -99,6 +102,7 @@ public class DataFrame extends javax.swing.JFrame {
         beta_rect = beta_rect/1000000;
         
         DecimalFormat    df   = new DecimalFormat("######0.0");  
+        //设置保留一位小数
         
         lb1.setText(df.format(fmax));
         lb2.setText(df.format(lamuda));
@@ -107,6 +111,7 @@ public class DataFrame extends javax.swing.JFrame {
         lb5.setText(df.format(kls1));
         lb6.setText(df.format(kls3));
         lb7.setText(df.format(kls2));
+        //显示数据
         return true;
     }
     
@@ -327,7 +332,7 @@ public class DataFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(Savexls.save(new String[]{lb1.getText(),lb2.getText(),lb3.getText(),lb4.getText(),lb5.getText(),lb6.getText(),lb7.getText()})){
-            JOptionPane.showMessageDialog(this, "保存在程序目录下的data.xls文件中");
+            JOptionPane.showMessageDialog(this, "保存在程序目录下的excel文件中");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -22,6 +22,7 @@ import jxl.write.WritableWorkbook;
 
 public class Excel
 {
+    //excel文件操作类
     private Workbook    rworkbook;
     private Sheet       rsheet;
     private WritableWorkbook wbook;

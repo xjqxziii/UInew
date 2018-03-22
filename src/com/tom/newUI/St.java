@@ -30,9 +30,10 @@ public class St implements Fun{
         this.f = f;
         this.n = n;
     }
+    //时域函数波形
     
-    static int[] a = new int[]{1,-1,1,-1,-1,1,1,1,1,1};
-    
+    static int[] a = new int[]{1,-1,1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,-1,1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,-1};
+    //时域函数二进制序列
     public double fun(double t){
         if (boc) { 
             return a[(int)(t*f/n)]*((Math.floor(t*f)%2==0)?1:-1);
@@ -48,7 +49,11 @@ public class St implements Fun{
         String title,xlable,ylable;
         XYSeries series;
         series = new XYSeries("cc");
-        w_val=24/600.0/ff;
+        if(boc){
+            w_val=24/600.0/f;
+        }else{
+            w_val=24*n/600.0/f;
+        }
         for(double i =0;i+1<600;i++){
             x1=i*w_val;
             y1=this.fun(x1);
