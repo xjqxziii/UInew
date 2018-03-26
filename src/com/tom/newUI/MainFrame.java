@@ -12,7 +12,7 @@ public class MainFrame extends javax.swing.JFrame {
     double temp;
     String str;
     boolean ab = true;
-    DrawFun drawFun = null;
+    FunDraw drawFun = null;
     public MainFrame() {
         initComponents();
         //显示主界面
@@ -103,11 +103,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         cb2.setFont(new java.awt.Font("微软雅黑", 0, 30)); // NOI18N
-<<<<<<< HEAD
-        cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "时域波形", "频域波形", "自相关函数", "码跟踪误差", "多径误差" }));
-=======
         cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "时域波形", "频域波形", "自相关函数", "多径误差" }));
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
         cb2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb2ItemStateChanged(evt);
@@ -213,7 +209,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void beginDrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginDrawActionPerformed
         //绘图按钮点击事件
-        drawFun = new DrawFun();
+        drawFun = new FunDraw();
         int a = (int)getDoubleFromTextField(jTextField1);
         int b = (int)getDoubleFromTextField(jTextField2);
         if(a>b||cb.getSelectedIndex() == 1){

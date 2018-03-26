@@ -14,7 +14,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author Tom
  */
-public class Err implements Fun{
+public class Err extends Fun{
 
     int a;
     int b;
@@ -26,7 +26,6 @@ public class Err implements Fun{
         this.a = a;
         this.b = b;
     }
-    //码跟踪误差函数
     public double fun(double d){
         Gf gf = new Gf(a, b,false);
         gf.setBoc(boc);
@@ -38,37 +37,45 @@ public class Err implements Fun{
         Double tempCos2=0.0;
         Double tempSin=0.0;
         Double tempSin2=0.0;
-        Callable<Double> td0 = () -> {
-            double temp=0;
-            gf.setLog(false);
-            for(double f=-(br/2-1);f<br/2;f=f+br/10000){
-                temp=temp+gf.fun(f)*Math.pow(Math.sin(Math.PI*f*d),2)*br/10000;
+        Callable<Double> td0 = new Callable<Double>(){
+                public Double call() throws Exception{
+                double temp=0;
+                gf.setLog(false);
+                for(double f=-(br/2-1);f<br/2;f=f+br/10000){
+                    temp=temp+gf.fun(f)*Math.pow(2,Math.sin(Math.PI*f*d))*br/10000;
+                }
+                return temp;
             }
-            return temp;
         };
-        Callable<Double> td1 = () -> {
-            double temp=0;
-            gf.setLog(false);
-            for(double f=-(br/2-1);f<br/2;f=f+br/10000){
-                temp=temp+f*gf.fun(f)*Math.sin(Math.PI*f*d)*br/10000.0;
+        Callable<Double> td1 = new Callable<Double>(){
+                public Double call() throws Exception{
+                double temp=0;
+                gf.setLog(false);
+                for(double f=-(br/2-1);f<br/2;f=f+br/10000){
+                    temp=temp+f*gf.fun(f)*Math.sin(Math.PI*f*d)*br/10000.0;
+                }
+                return temp;
             }
-            return temp;
         };
-        Callable<Double> td2 = () -> {
-            double temp=0;
-            gf.setLog(false);
-            for(double f=-(br/2-1);f<br/2;f=f+br/10000){
-                temp=temp+gf.fun(f)*Math.pow(Math.cos(Math.PI*f*d),2)*br/10000;
+        Callable<Double> td2 = new Callable<Double>(){
+                public Double call() throws Exception{
+                double temp=0;
+                gf.setLog(false);
+                for(double f=-(br/2-1);f<br/2;f=f+br/10000){
+                    temp=temp+gf.fun(f)*Math.pow(2,Math.cos(Math.PI*f*d))*br/10000;
+                }
+                return temp;
             }
-            return temp;
         };
-        Callable<Double> td3 = () -> {
-            double temp=0;
-            gf.setLog(false);
-            for(double f=-(br/2-1);f<br/2;f=f+br/10000){
-                temp=temp+gf.fun(f)*Math.cos(Math.PI*f*d)*br/10000;
+        Callable<Double> td3 = new Callable<Double>(){
+                public Double call() throws Exception{
+                double temp=0;
+                gf.setLog(false);
+                for(double f=-(br/2-1);f<br/2;f=f+br/10000){
+                    temp=temp+gf.fun(f)*Math.cos(Math.PI*f*d)*br/10000;
+                }
+                return temp;
             }
-            return temp;
         };
         FutureTask<Double> future0 = new FutureTask<>(td0);
         FutureTask<Double> future1 = new FutureTask<>(td1);
@@ -86,7 +93,6 @@ public class Err implements Fun{
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-        //获得计算的四积分的值
         double temp1;
         double temp2;
         double temp3;
@@ -95,20 +101,17 @@ public class Err implements Fun{
         temp2 = tempCos2/T/CN0/Math.pow(tempCos,2);
         tNELP = temp1*(1+temp2)/temp3;
         tNELP = tNELP *300000000;
-//        tNELP = (tNELP>0.7)?0.7:tNELP;
-        //计算出码跟踪误差
+        tNELP = (tNELP>0.7)?0.7:tNELP;
         return tNELP;
     }
     
-    public XYSeriesCollection[] draw(){
-        //显示图像函数
+    public void draw(){
         double x1,y1;
         double w_val;
         XYSeries series;
         w_val=40/1000000000.0/600.0;
         
         series = new XYSeries("NELP,50bps");
-        //添加第一个函数曲线
         for(double i =300;i<900;i++){
             x1=i*w_val;
             T = 20/1000000.0;
@@ -119,7 +122,6 @@ public class Err implements Fun{
 	dataset.addSeries(series);
         
         series = new XYSeries("NELP,200bps");
-        //添加第二个函数曲线
         for(double i =300;i<900;i++){
             x1=i*w_val;
             T = 5/1000000.0;
@@ -129,14 +131,9 @@ public class Err implements Fun{
 	dataset.addSeries(series);
         XYSeriesCollection[] datasets;
         datasets = new XYSeriesCollection[]{dataset};
-        return datasets;
+//        return datasets;
     }
-
-    public boolean isBoc() {
-        return boc;
-    }
-
-    public void setBoc(boolean boc) {
-        this.boc = boc;
+    public void setW_val() {
+        w_val=40/1000000000.0/600.0;
     }
 }

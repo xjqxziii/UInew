@@ -8,21 +8,12 @@ package com.tom.newUI;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-<<<<<<< HEAD
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-=======
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
 
 /**
  *
  * @author tom
  */
-<<<<<<< HEAD
-public class ManyWaysErr implements Fun{
-=======
 public class ManyWaysErr extends Fun{
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     int a;
     int b;
     private boolean boc;
@@ -45,7 +36,7 @@ public class ManyWaysErr extends Fun{
         Double tempSinCos=0.0;
         Double tempSin=0.0;
         Double tempSin2=0.0;
-        double tc = 2/(b*DrawFun.ff);
+        double tc = 2/(b*FunDraw.ff);
         Callable<Double> td0 = () -> {
             double br1 = 24000000.0;
             double temp=0;
@@ -96,49 +87,7 @@ public class ManyWaysErr extends Fun{
         //返回两个不同的曲线
         return tNELP[p];
     }
-<<<<<<< HEAD
-    
-    @Override
-    public XYSeriesCollection[] draw(){
-        double x1,y1,y2;
-        double w_val;
-        w_val=300/1000000000.0/600.0;
-        
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series1;
-        XYSeries series2;
-        series1 = new XYSeries("+");
-        series2 = new XYSeries("-");
-        for(double i =0;i<600;i++){
-            x1=i*w_val;
-            p=0;
-            y1=this.fun(x1);
-            p=1;
-            y2=this.fun(x1);
-            //获得两根曲线
-            series1.add(x1*1000000000.0,y1);
-            series2.add(x1*1000000000.0,y2);
-        }
-	dataset.addSeries(series1);
-	dataset.addSeries(series2);
-        
-        XYSeriesCollection[] datasets;
-        datasets = new XYSeriesCollection[]{dataset};
-        return datasets;
-    }      
-=======
      
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
-
-    @Override
-    public boolean isBoc() {
-        return boc;
-    }
-
-    @Override
-    public void setBoc(boolean boc) {
-        this.boc = boc;
-    }
 
     @Override
     public void setW_val() {

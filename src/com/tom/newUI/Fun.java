@@ -10,14 +10,6 @@ package com.tom.newUI;
  *
  * @author tom
  */
-<<<<<<< HEAD
-public interface Fun {
-    //函数接口
-    public double fun(double f);
-    public XYSeriesCollection[] draw();
-    public boolean isBoc();
-    public void setBoc(boolean boc);
-=======
 public abstract class Fun {
     //函数接口
     public Draw d;
@@ -50,5 +42,4 @@ public abstract class Fun {
         setW_val();
     }
     public abstract void setW_val();
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
 }

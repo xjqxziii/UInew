@@ -21,21 +21,16 @@ public class Gf extends Fun{
     public Gf(int a,int b,boolean log){
         this.b = b;
         this.a = a;
-<<<<<<< HEAD
-        this.log = log;
-        
-=======
         this.setLog(log);
         d = new DrawOneLine(this);
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     }
     //BOC或BPSK频谱函数
     
     public double fun(double f){
-        double fc = b * DrawFun.ff;
+        double fc = b * FunDraw.ff;
         double gf;
         if (isBoc()) {
-            double fs = a * DrawFun.ff;
+            double fs = a * FunDraw.ff;
             if((2*a/b)%2==0){
                 gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
             }else{
@@ -57,34 +52,6 @@ public class Gf extends Fun{
         return gf;
     }
     
-<<<<<<< HEAD
-    public XYSeriesCollection[] draw(){
-        //画图函数
-        
-        double x1,y1;
-        double w_val;
-        XYSeries series;
-        series = new XYSeries("cc");
-        this.log = true;
-        if (boc) {
-            w_val=50000;
-        } else {
-            w_val=20000*b;
-        }
-        for(double i =-300;i+1<300;i++){
-            x1=i*w_val;    
-            y1=this.fun(x1);
-            series.add(x1,y1);
-        }
-        XYSeriesCollection dataset = new XYSeriesCollection();
-	dataset.addSeries(series);
-        XYSeriesCollection[] datasets;
-        datasets = new XYSeriesCollection[]{dataset};
-        return datasets;
-    }
-
-=======
->>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     public boolean isLog() {
         return log;
     }
