@@ -331,7 +331,11 @@ public class DataFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+<<<<<<< HEAD
         if(Savexls.save(new String[]{lb1.getText(),lb2.getText(),lb3.getText(),lb4.getText(),lb5.getText(),lb6.getText(),lb7.getText()})){
+=======
+        if(SaveFile.save(new String[]{lb1.getText(),lb2.getText(),lb3.getText(),lb4.getText(),lb5.getText(),lb6.getText(),lb7.getText()})){
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
             JOptionPane.showMessageDialog(this, "保存在程序目录下的excel文件中");
         }
     }//GEN-LAST:event_jButton1ActionPerformed

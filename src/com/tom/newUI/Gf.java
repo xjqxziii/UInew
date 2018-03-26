@@ -13,24 +13,28 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author tom
  */
-public class Gf implements Fun{
+public class Gf extends Fun{
     int a;
     int b;
-    private boolean boc;
-    private boolean log;
-    
+        private boolean log;
+        
     public Gf(int a,int b,boolean log){
         this.b = b;
         this.a = a;
+<<<<<<< HEAD
         this.log = log;
         
+=======
+        this.setLog(log);
+        d = new DrawOneLine(this);
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     }
     //BOC或BPSK频谱函数
     
     public double fun(double f){
         double fc = b * DrawFun.ff;
         double gf;
-        if (boc) {
+        if (isBoc()) {
             double fs = a * DrawFun.ff;
             if((2*a/b)%2==0){
                 gf = fc*Math.pow((Math.tan(Math.PI*f/2/fs)*Math.sin(Math.PI*f/fc)/Math.PI/f),2);
@@ -53,6 +57,7 @@ public class Gf implements Fun{
         return gf;
     }
     
+<<<<<<< HEAD
     public XYSeriesCollection[] draw(){
         //画图函数
         
@@ -78,6 +83,8 @@ public class Gf implements Fun{
         return datasets;
     }
 
+=======
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     public boolean isLog() {
         return log;
     }
@@ -85,12 +92,13 @@ public class Gf implements Fun{
     public void setLog(boolean log) {
         this.log = log;
     }
-
-    public boolean isBoc() {
-        return boc;
-    }
-
-    public void setBoc(boolean boc) {
-        this.boc = boc;
+    
+    @Override
+    public void setW_val() {
+        if (isBoc()) {
+            w_val=50000;
+        } else {
+            w_val=20000*b;
+        }
     }
 }

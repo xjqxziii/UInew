@@ -8,14 +8,21 @@ package com.tom.newUI;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+<<<<<<< HEAD
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+=======
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
 
 /**
  *
  * @author tom
  */
+<<<<<<< HEAD
 public class ManyWaysErr implements Fun{
+=======
+public class ManyWaysErr extends Fun{
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     int a;
     int b;
     private boolean boc;
@@ -26,6 +33,7 @@ public class ManyWaysErr implements Fun{
     public ManyWaysErr(int a,int b) {
         this.a = a;
         this.b = b;
+        d = new DrawTwoLines(this);
     }
     //多径码误差函数
     @Override
@@ -88,6 +96,7 @@ public class ManyWaysErr implements Fun{
         //返回两个不同的曲线
         return tNELP[p];
     }
+<<<<<<< HEAD
     
     @Override
     public XYSeriesCollection[] draw(){
@@ -117,6 +126,9 @@ public class ManyWaysErr implements Fun{
         datasets = new XYSeriesCollection[]{dataset};
         return datasets;
     }      
+=======
+     
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
 
     @Override
     public boolean isBoc() {
@@ -126,5 +138,10 @@ public class ManyWaysErr implements Fun{
     @Override
     public void setBoc(boolean boc) {
         this.boc = boc;
+    }
+
+    @Override
+    public void setW_val() {
+        w_val=300/1000000000.0/600.0;
     }
 }

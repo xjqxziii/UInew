@@ -5,6 +5,7 @@
  */
 package com.tom.newUI;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeriesCollection;
 
+=======
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
 /**
  *
  * @author tom
@@ -59,9 +62,11 @@ public class DrawFun {
     int a,b;
     double br;
     static final double ff = 1023000.0;
+    private boolean boc;
     
     public void paint() {
         //绘图函数
+<<<<<<< HEAD
         Fun fun;
         String title=null,xlable=null,ylable=null;
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -72,39 +77,31 @@ public class DrawFun {
         }else{
             type = "BPSK";
         }
+=======
+        Fun fun = null;
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
         switch(flag)
         {  
         case 0:
             fun = (boc)?new St(ff,(2*a/b)):new St(ff,b);
+<<<<<<< HEAD
             fun.setBoc(boc);
             title=type + "时域波形";
             xlable="t";
             ylable="S(t)";
             dataset = fun.draw()[0];
+=======
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
         break;
         case 1:
             fun = new Gf(a,b,true);
-            fun.setBoc(boc);
-            title=type + "频域波形";
-            xlable="f";
-            ylable="G(f)";
-            dataset = fun.draw()[0];
+            
         break;
         case 2:
             fun = new Rt(new Gf(a,b,false),br);
-            fun.setBoc(boc);
-            title=type + "自相关波形";
-            xlable="t";
-            ylable="R(t)";
-            dataset = fun.draw()[0];
         break;
         case 3:
-            fun = new Err((int)a,(int)b);
-            fun.setBoc(boc);
-            title=type + "码跟踪误差";
-            xlable="delta";
-            ylable="码跟踪误差方差*c";
-            dataset = fun.draw()[0];
+            fun = new ManyWaysErr((int)a,(int)b);
         break;
         case 4:
             fun = new ManyWaysErr((int)a,(int)b);
@@ -115,6 +112,7 @@ public class DrawFun {
             dataset = fun.draw()[0];
         break;
         }
+<<<<<<< HEAD
         
 	JFreeChart chart = ChartFactory.createXYLineChart(
 		title, // chart title
@@ -148,8 +146,11 @@ public class DrawFun {
 	frame.setVisible(true);
         //设置画图窗口显示
         
+=======
+        fun.setBoc(boc);
+        fun.draw();
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
     }
-    private boolean boc;
 
     public boolean isBoc() {
         return boc;
@@ -158,6 +159,7 @@ public class DrawFun {
     public void setBoc(boolean boc) {
         this.boc = boc;
     }
+<<<<<<< HEAD
 
     
     public void saveImg(JFreeChart chart){
@@ -177,5 +179,7 @@ public class DrawFun {
         }
 
     }
+=======
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
 }
     

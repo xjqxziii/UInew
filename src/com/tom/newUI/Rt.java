@@ -7,31 +7,20 @@ package com.tom.newUI;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 
 /**
  *
  * @author tom
  */
-public class Rt implements Fun{
+public class Rt extends Fun{
     Gf gf = null;
     double br;
-
-    private boolean boc;
-
-    public boolean isBoc() {
-        return boc;
-    }
-
-    public void setBoc(boolean boc) {
-        this.boc = boc;
-    }
 
     public Rt(Gf gf,double br){
         this.gf=gf;
         this.br = br;
+        d = new DrawOneLine(this);
     }
     //自相关函数
     public double fun(double t){
@@ -75,28 +64,12 @@ public class Rt implements Fun{
         return temp;
     }
     
-    public XYSeriesCollection[] draw(){
-        this.gf.setBoc(boc);
-        double x1,y1;
-        double w_val;
-        XYSeries series;
-        series = new XYSeries("cc");
-        double r1 ;
-        r1 = this.fun(0);
+    @Override
+    public void setW_val() {
         if (gf.isBoc()) {
             w_val=1/300.0/800000/gf.b;
         } else {
             w_val=1/300.0/500000/gf.b;
         }
-        for(double i =-300;i+1<300;i++){
-            x1=i*w_val;    
-            y1=this.fun(x1);
-            series.add(x1,y1/r1);
-        }
-        XYSeriesCollection dataset = new XYSeriesCollection();
-	dataset.addSeries(series);
-        XYSeriesCollection[] datasets;
-        datasets = new XYSeriesCollection[]{dataset};
-        return datasets;
     }
 }

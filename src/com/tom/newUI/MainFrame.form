@@ -231,8 +231,12 @@
                 <StringItem index="0" value="&#x65f6;&#x57df;&#x6ce2;&#x5f62;"/>
                 <StringItem index="1" value="&#x9891;&#x57df;&#x6ce2;&#x5f62;"/>
                 <StringItem index="2" value="&#x81ea;&#x76f8;&#x5173;&#x51fd;&#x6570;"/>
+<<<<<<< HEAD
                 <StringItem index="3" value="&#x7801;&#x8ddf;&#x8e2a;&#x8bef;&#x5dee;"/>
                 <StringItem index="4" value="&#x591a;&#x5f84;&#x8bef;&#x5dee;"/>
+=======
+                <StringItem index="3" value="&#x591a;&#x5f84;&#x8bef;&#x5dee;"/>
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
               </StringArray>
             </Property>
           </Properties>

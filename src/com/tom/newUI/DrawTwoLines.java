@@ -18,26 +18,39 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author tom
  */
-public class DrawOneLine implements Draw{
+public class DrawTwoLines implements Draw{
     Fun gf;
     
-    public DrawOneLine(Fun gf){
+    public DrawTwoLines(Fun gf){
         this.gf = gf;
     }
     
     @Override
     public void draw(String title,String xlable,String ylable,double w_val){
-        double x1,y1;
-        XYSeries series;
-        series = new XYSeries("cc");
-        for(double i =-300;i+1<300;i++){
-            x1=i*w_val;    
-            y1=this.gf.fun(x1);
-            series.add(x1,y1);
-        }
+        double x1,y1,y2;
+        
+        
         XYSeriesCollection dataset = new XYSeriesCollection();
-	dataset.addSeries(series);
+        XYSeries series1;
+        XYSeries series2;
+        series1 = new XYSeries("+");
+        series2 = new XYSeries("-");
+        for(double i =0;i<600;i++){
+            x1=i*w_val;
+            y1=this.gf.fun(x1);
+            y2=this.gf.fun(x1);
+            //获得两根曲线
+            series1.add(x1*1000000000.0,y1);
+            series2.add(x1*1000000000.0,y2);
+        }
+	dataset.addSeries(series1);
+	dataset.addSeries(series2);
+        
         XYSeriesCollection[] datasets;
+        datasets = new XYSeriesCollection[]{dataset};
+	
+	dataset.addSeries(series1);
+	dataset.addSeries(series2);
         datasets = new XYSeriesCollection[]{dataset};
         
         
@@ -73,5 +86,4 @@ public class DrawOneLine implements Draw{
 	frame.setVisible(true);
         //设置画图窗口显示
     }
-
 }

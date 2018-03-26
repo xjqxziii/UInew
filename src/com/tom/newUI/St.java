@@ -5,42 +5,31 @@
  */
 package com.tom.newUI;
 
-import static com.tom.newUI.DrawFun.ff;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-
 /**
  *
  * @author tom
  */
-public class St implements Fun{
+public class St extends Fun{
     int n;
     double f;
-    private boolean boc;
-
-    public boolean isBoc() {
-        return boc;
-    }
-
-    public void setBoc(boolean boc) {
-        this.boc = boc;
-    }
 
     public St(double f,int n) {
         this.f = f;
         this.n = n;
+        d = new DrawOneLine(this);
     }
     //时域函数波形
     
     static int[] a = new int[]{1,-1,1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,-1,1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,-1};
     //时域函数二进制序列
     public double fun(double t){
-        if (boc) { 
+        if (isBoc()) { 
             return a[(int)(t*f/n)]*((Math.floor(t*f)%2==0)?1:-1);
         } else {
             return a[(int)(t*f/n)];
         }
     }
+<<<<<<< HEAD
     
     public XYSeriesCollection[] draw(){
         
@@ -58,11 +47,14 @@ public class St implements Fun{
             x1=i*w_val;
             y1=this.fun(x1);
             series.add(x1,y1);
+=======
+    @Override
+    public void setW_val() {
+        if (isBoc()) {
+            w_val=24/600.0/f;
+        }else{
+            w_val=24*n/600.0/f;
+>>>>>>> 68ab6c0309870334b9878156b4089b7ca09a3420
         }
-        XYSeriesCollection dataset = new XYSeriesCollection();
-	dataset.addSeries(series);
-        XYSeriesCollection[] datasets;
-        datasets = new XYSeriesCollection[]{dataset};
-        return datasets;
     }
 }
