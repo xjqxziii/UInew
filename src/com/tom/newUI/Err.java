@@ -67,20 +67,25 @@ public class Err extends Fun{
                 return temp;
             }
         };
-        Callable<Double> td3 = new Callable<Double>(){
-                public Double call() throws Exception{
+        Callable<Double> td3 = () -> {
+            double temp=0;
+            gf.setLog(false);
+            for(double f=-(br/2-1);f<br/2;f=f+br/10000){
+                temp=temp+gf.fun(f)*Math.cos(Math.PI*f*d)*br/10000;
+            }
+            return temp;
+        };
+        FutureTask<Double> future0 = new FutureTask<>(td0);
+        FutureTask<Double> future1 = new FutureTask<>(td1);
+        FutureTask<Double> future2 = new FutureTask<>(td2);
+        FutureTask<Double> future3 = new FutureTask<>(() -> {
                 double temp=0;
                 gf.setLog(false);
                 for(double f=-(br/2-1);f<br/2;f=f+br/10000){
                     temp=temp+gf.fun(f)*Math.cos(Math.PI*f*d)*br/10000;
                 }
                 return temp;
-            }
-        };
-        FutureTask<Double> future0 = new FutureTask<>(td0);
-        FutureTask<Double> future1 = new FutureTask<>(td1);
-        FutureTask<Double> future2 = new FutureTask<>(td2);
-        FutureTask<Double> future3 = new FutureTask<>(td3);
+            });
         new Thread(future0).start();
         new Thread(future1).start();
         new Thread(future2).start();
